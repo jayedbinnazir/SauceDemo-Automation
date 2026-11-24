@@ -4,3 +4,5 @@ npx playwright test tests/auth/login.spec.ts --headed --project=chromium
 npm test                 # run the suite
 npm run report            # open the last HTML report
 npx playwright show-trace test-results/<test-folder>/trace.zip   # inspect a failure trace
+
+npx playwright test --project=chromium
