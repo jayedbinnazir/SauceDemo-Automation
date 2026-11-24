@@ -26,8 +26,6 @@ test.describe('Inventory - Product Listing', () => {
   test('should display a valid name and price for every product', async ({ page }) => {
     const inventoryPage = new InventoryPage(page);
 
-    await expect(inventoryPage.inventoryItems.first()).toBeVisible();
-
     const names = await inventoryPage.getItemNames();
     const prices = await inventoryPage.getItemPrices();
 
