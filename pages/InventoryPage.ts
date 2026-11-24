@@ -10,6 +10,8 @@ export class InventoryPage {
   readonly addToCartButtons: Locator;
   readonly cartBadge: Locator;
   readonly cartLink: Locator;
+  readonly burgerMenuButton: Locator;
+  readonly logoutLink: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -21,6 +23,8 @@ export class InventoryPage {
     this.addToCartButtons = page.locator('.inventory_item button');
     this.cartBadge = page.locator('[data-test="shopping-cart-badge"]');
     this.cartLink = page.locator('[data-test="shopping-cart-link"]');
+    this.burgerMenuButton = page.locator('#react-burger-menu-btn');
+    this.logoutLink = page.locator('#logout_sidebar_link');
   }
 
   async getItemNames(): Promise<string[]> {
@@ -48,5 +52,10 @@ export class InventoryPage {
 
   async goToCart() {
     await this.cartLink.click();
+  }
+
+  async logout() {
+    await this.burgerMenuButton.click();
+    await this.logoutLink.click();
   }
 }
