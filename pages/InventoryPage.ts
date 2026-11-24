@@ -1,4 +1,4 @@
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 
 export class InventoryPage {
   readonly page: Page;
@@ -18,15 +18,21 @@ export class InventoryPage {
   }
 
   async getItemNames(): Promise<string[]> {
+    await expect(this.inventoryItems.first()).toBeVisible();
     return this.itemNames.allTextContents();
   }
 
   async getItemPrices(): Promise<number[]> {
+    await expect(this.inventoryItems.first()).toBeVisible();
     const prices = await this.itemPrices.allTextContents();
     return prices.map((price) => parseFloat(price.replace('$', '')));
   }
 
   async sortBy(option: 'az' | 'za' | 'lohi' | 'hilo') {
     await this.sortDropdown.selectOption(option);
+  }
+
+  async openProduct(index: number) {
+    await this.itemNames.nth(index).click();
   }
 }
