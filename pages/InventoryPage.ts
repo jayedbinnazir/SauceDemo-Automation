@@ -7,6 +7,9 @@ export class InventoryPage {
   readonly itemNames: Locator;
   readonly itemPrices: Locator;
   readonly sortDropdown: Locator;
+  readonly addToCartButtons: Locator;
+  readonly cartBadge: Locator;
+  readonly cartLink: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -15,6 +18,9 @@ export class InventoryPage {
     this.itemNames = page.locator('.inventory_item_name');
     this.itemPrices = page.locator('.inventory_item_price');
     this.sortDropdown = page.locator('[data-test="product-sort-container"]');
+    this.addToCartButtons = page.locator('.inventory_item button');
+    this.cartBadge = page.locator('[data-test="shopping-cart-badge"]');
+    this.cartLink = page.locator('[data-test="shopping-cart-link"]');
   }
 
   async getItemNames(): Promise<string[]> {
@@ -34,5 +40,13 @@ export class InventoryPage {
 
   async openProduct(index: number) {
     await this.itemNames.nth(index).click();
+  }
+
+  async addProductToCart(index: number) {
+    await this.addToCartButtons.nth(index).click();
+  }
+
+  async goToCart() {
+    await this.cartLink.click();
   }
 }
